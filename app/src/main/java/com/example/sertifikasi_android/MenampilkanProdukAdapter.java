@@ -56,14 +56,14 @@ public class MenampilkanProdukAdapter extends RecyclerView.Adapter<MenampilkanPr
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-//                    Intent intent = new Intent(context, DetailActivity.class);
-//                    intent.putExtra("ID_BARANG", list.get(getAdapterPosition()).getIdBarang());
-//                    intent.putExtra("NAMA_BARANG", list.get(getAdapterPosition()).getNamaBarang());
-//                    intent.putExtra("IMAGE_BARANG", list.get(getAdapterPosition()).getImageBarang());
-//                    intent.putExtra("DESKRIPSI_BARANG", list.get(getAdapterPosition()).getDeskripsiBarang());
-//                    intent.putExtra("HARGA_BARANG", list.get(getAdapterPosition()).getHargaBarang());
-//                    intent.putExtra("STOK_BARANG", list.get(getAdapterPosition()).getStokBarang());
-//                    context.startActivity(intent);
+                    Intent intent = new Intent(context, DetailActivity.class);
+                    intent.putExtra("ID_BARANG", list.get(getAdapterPosition()).getIdBarang());
+                    intent.putExtra("NAMA_BARANG", list.get(getAdapterPosition()).getNamaBarang());
+                    intent.putExtra("IMAGE_BARANG", list.get(getAdapterPosition()).getImageBarang());
+                    intent.putExtra("DESKRIPSI_BARANG", list.get(getAdapterPosition()).getDeskripsiBarang());
+                    intent.putExtra("HARGA_BARANG", list.get(getAdapterPosition()).getHargaBarang());
+                    intent.putExtra("STOK_BARANG", list.get(getAdapterPosition()).getStokBarang());
+                    context.startActivity(intent);
                 }
             });
         }
