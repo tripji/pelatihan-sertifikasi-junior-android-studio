@@ -46,6 +46,13 @@ public class MainActivity extends AppCompatActivity
         drawer.addDrawerListener(toggle);
         toggle.syncState();
         navigationView.setNavigationItemSelectedListener(this);
+
+        FragmentManager manager = getSupportFragmentManager();
+        manager.beginTransaction()
+                .add(R.id.frame_layout, new ProdukFragment())
+                .addToBackStack("fragment")
+                .commit();
+        getSupportActionBar().setTitle("Produk");
     }
 
     @Override
