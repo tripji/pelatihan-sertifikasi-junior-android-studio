@@ -48,4 +48,9 @@ public interface ApiService {
             @Field("harga_barang") String harga_barang,
             @Field("stok_barang") String stok_barang
     );
+
+    @FormUrlEncoded
+    @POST("api_hapus_barang.php")
+    Call<ResponseBody> hapusData(
+            @Field("id_barang") String id_barang);
 }

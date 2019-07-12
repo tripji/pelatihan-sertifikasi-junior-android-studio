@@ -19,6 +19,8 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+import static android.view.View.GONE;
+
 public class DetailActivity extends AppCompatActivity {
 
     private String idBarang;
@@ -56,33 +58,45 @@ public class DetailActivity extends AppCompatActivity {
         tcHargaBarang.setText(hargaBarang);
         tcStokBarang.setText(stokBarang);
 
+/*
+if (Integer.parseInt(String.valueOf(tcStokBarang)) == 0) {
+btnKirim.setVisibility(GONE);
+} else {
+btnKirim.setVisibility(View.VISIBLE);
+}
+*/
+
         btnKirim.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                ApiService apiService = ApiConfig.getApiService();
-                apiService.beliData(idBarang).enqueue(new Callback<ResponseBody>() {
-                    @Override
-                    public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-
-
-                        if (response.isSuccessful()){
-                            Toast.makeText(DetailActivity.this, "Sukses", Toast.LENGTH_SHORT).show();
-                            startActivity(new Intent(getApplicationContext(), MainActivity.class));
-                            finishAffinity();
+                @Override
+                public void onClick(View view) {
+                    ApiService apiService = ApiConfig.getApiService();
+                    apiService.beliData(idBarang).enqueue(new Callback<ResponseBody>() {
+                        @Override
+                        public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                            if(Integer.parseInt(stokBarang)<=0) {
+                                btnKirim.setVisibility(View.INVISIBLE);
+                                Toast.makeText(DetailActivity.this, "Stok Habis", Toast.LENGTH_SHORT).show();
+                            } else {
+                                btnKirim.setVisibility(View.VISIBLE);
+                            if (response.isSuccessful()) {
+                                    Toast.makeText(DetailActivity.this, "Sukses", Toast.LENGTH_SHORT).show();
+                                    startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                                    finishAffinity();
+                                }
+                            }
                         }
-                    }
 
-                    @Override
-                    public void onFailure(Call<ResponseBody> call, Throwable t) {
-                        Toast.makeText(DetailActivity.this, "" +t.getMessage(), Toast.LENGTH_SHORT).show();
-                    }
-                });
-            }
-        });
+                        @Override
+                        public void onFailure(Call<ResponseBody> call, Throwable t) {
+                            Toast.makeText(DetailActivity.this, "" + t.getMessage(), Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                }
+            });
 
-        btnEditBarang.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+            btnEditBarang.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
 //                ApiService apiService = ApiConfig.getApiService();
 //                apiService.editData(idBarang).enqueue(new Callback<ResponseBody>() {
 //                    @Override
@@ -97,17 +111,18 @@ public class DetailActivity extends AppCompatActivity {
 //
 //                    }
 //                });
-                Intent intent = new Intent(DetailActivity.this, UpdateActivity.class);
-                intent.putExtra("ID_BARANG", idBarang);
-                intent.putExtra("NAMA_BARANG", namaBarang);
-                intent.putExtra("IMAGE_BARANG", imageBarang);
-                intent.putExtra("DESKRIPSI_BARANG", deskripsiBarang);
-                intent.putExtra("HARGA_BARANG", hargaBarang);
-                intent.putExtra("STOK_BARANG", stokBarang);
-                startActivity(intent);
-            }
-        });
-    }
+                    Intent intent = new Intent(DetailActivity.this, UpdateActivity.class);
+                    intent.putExtra("ID_BARANG", idBarang);
+                    intent.putExtra("NAMA_BARANG", namaBarang);
+                    intent.putExtra("IMAGE_BARANG", imageBarang);
+                    intent.putExtra("DESKRIPSI_BARANG", deskripsiBarang);
+                    intent.putExtra("HARGA_BARANG", hargaBarang);
+                    intent.putExtra("STOK_BARANG", stokBarang);
+                    startActivity(intent);
+                }
+            });
+        }
+
 
     private void initView() {
         iv = findViewById(R.id.iv);

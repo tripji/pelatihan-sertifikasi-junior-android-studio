@@ -50,7 +50,7 @@ public class MainActivity extends AppCompatActivity
         FragmentManager manager = getSupportFragmentManager();
         manager.beginTransaction()
                 .add(R.id.frame_layout, new ProdukFragment())
-                .addToBackStack("fragment")
+//                .addToBackStack("fragment")
                 .commit();
         getSupportActionBar().setTitle("Produk");
     }
@@ -98,18 +98,23 @@ public class MainActivity extends AppCompatActivity
             FragmentManager manager = getSupportFragmentManager();
             manager.beginTransaction()
                     .add(R.id.frame_layout, new ProdukFragment())
-                    .addToBackStack("fragment")
+//                    .addToBackStack("fragment")
                     .commit();
             getSupportActionBar().setTitle("Produk");
         } else if (id == R.id.nav_tambah) {
             FragmentManager manager = getSupportFragmentManager();
             manager.beginTransaction()
                     .add(R.id.frame_layout, new TambahFragment())
-                    .addToBackStack("fragment")
+//                    .addToBackStack("fragment")
                     .commit();
             getSupportActionBar().setTitle("Tambah");
         } else if (id == R.id.nav_hapus) {
-
+            FragmentManager manager = getSupportFragmentManager();
+            manager.beginTransaction()
+                    .add(R.id.frame_layout, new HapusFragment())
+//                    .addToBackStack("fragment")
+                    .commit();
+            getSupportActionBar().setTitle("Hapus");
         }
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
